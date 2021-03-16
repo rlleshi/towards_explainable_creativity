@@ -1,2 +1,2 @@
 # r_m_thesis
-Thesis work
+Thesis work: Explainable creativity
