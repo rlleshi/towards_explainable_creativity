@@ -26,7 +26,10 @@ def parse_args():
 
 def parse_file(file):
     df = pd.read_excel(file)
-    nodes = [node if type(node) is str else None for node in df.FrAt]
+    try:
+        nodes = [node if type(node) is str else None for node in df.FrAt]
+    except AttributeError:
+        nodes = [node if type(node) is str else None for node in df.RAT]
     solutions = [sol if type(sol) is str else None for sol in df.solutions]
     return nodes, solutions
 
@@ -41,7 +44,10 @@ def check_glove(g, pair):
 def update_df(file, out):
     df = pd.read_excel(file)
     df['embeddings'] = out
-    df = df[['FrAt', 'ground solution', 'solutions', 'has_solution', 'embeddings', 'relation', 'Accuracy']]
+    try:
+        df = df[['FrAt', 'ground solution', 'solutions', 'has_solution', 'embeddings', 'relation', 'Accuracy']]
+    except KeyError:
+        df = df[['RAT', 'ground_solution', 'solutions', 'has_solution', 'embeddings', 'relation', 'Accuracy']]
     df.to_excel(file.strip('.xlsx') + '_embeddings.xlsx')
     print('Updated csv')
 
