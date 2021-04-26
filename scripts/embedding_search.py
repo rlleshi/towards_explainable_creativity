@@ -1,4 +1,5 @@
 import os
+import re
 import time
 import itertools
 
@@ -41,15 +42,17 @@ def check_glove(g, pair):
     elif np.any(em2) is None: return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[1])
     return '{} - {}: {}  |  '.format(pair[0], pair[1], round(cosine_similarity(em1, em2)[0][0], 3))
 
-def update_df(file, out):
+def update_df(file, out, out_best):
     df = pd.read_excel(file)
     df['embeddings'] = out
+    df['top_embedding'] = out_best
     try:
-        df = df[['FrAt', 'ground solution', 'solutions', 'has_solution', 'embeddings', 'relation', 'Accuracy']]
+        df = df[['FrAt', 'ground solution', 'solutions', 'has_solution', 'embeddings', 'top_embedding', 'relation', 'Accuracy']]
     except KeyError:
-        df = df[['RAT', 'ground_solution', 'solutions', 'has_solution', 'embeddings', 'relation', 'Accuracy']]
+        df = df[['RAT', 'ground_solution', 'solutions', 'has_solution', 'embeddings', 'top_embedding', 'relation', 'Accuracy']]
     df.to_excel(file.strip('.xlsx') + '_embeddings.xlsx')
-    print('Updated csv')
+    df.to_json(file.strip('.xlsx') + '_embeddings.json', indent=4)
+    print('Saved output')
 
 if __name__ == '__main__':
     args = parse_args()
@@ -57,20 +60,31 @@ if __name__ == '__main__':
     start_time = time.time()
     g = GloveEmbedding('common_crawl_840', d_emb=300, show_progress=True)
     out = []
+    out_best = []
 
     for i in range(len(solutions)):
         if solutions[i] is None:
             out.append('')
+            out_best.append('')
             continue
         print('# Examining Nodes {} | Solutions: {}...'.format(nodes[i], solutions[i]))
 
         result = ''
-        for pair in itertools.product(nodes[i].split(', '), solutions[i].split(', ')):
+        sols = solutions[i].split(', ')
+        best_embd = {sol: 0 for sol in sols}
+
+        for pair in itertools.product(nodes[i].split(', '), sols): # cartesian product
             print('## Examining {}'.format(pair))
-            result += check_glove(g, pair)
+            res = check_glove(g, pair)
+            result += res
+            val = re.findall('\d+\.\d+', res)
+            best_embd[pair[1]] += float(val[0]) if len(val) > 0 else 0
+
+        mAx = max(best_embd.values())
+        for k, v in best_embd.items():
+            if v == mAx: out_best.append(k)
         out.append(result)
 
         print('Timestamp: {}'.format(round(time.time()-start_time, 2)))
-        # break
 
-    update_df(args.File, out)
+    update_df(args.File, out, out_best)
