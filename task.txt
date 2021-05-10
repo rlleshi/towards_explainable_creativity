@@ -1,0 +1,6 @@
+Task: Next meeting Thursday 
+
+1. For combinations with no solutions we can take a path back. Like instead of direct connections, we can see for path length 2. 
+cemetery, coma, noose : we can check for all possible solutions with path length 2 with all the combinations. 
+
+2. Would be really helpful if you can make a separate column for relationship name without is_a or part_of. Looks easy, but it hard. 
