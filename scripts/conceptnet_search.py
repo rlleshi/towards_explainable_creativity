@@ -12,25 +12,18 @@ from conceptnet_lite import Label, edges_between, edges_for
 
 #
 START_TIME = time.time()
-manager = Manager()
-OUTPUT = manager.list()
-ACCURACY = manager.dict()
-ACCURACY['total'] = 0
-ACCURACY['tp'] = 0
 #
 
 def get_conceptnet():
-    if not os.path.exists('/conceptnet/'):
-        os.makedirs('/conceptnet/')
-    conceptnet_lite.connect("/conceptnet/conceptnet_database.db")
+    conceptnet_lite.connect('conceptnet_database.db')
 
-def save_csv(args):
-    global OUTPUT
+def save_csv(args, OUTPUT):
     output = pd.DataFrame(list(OUTPUT))
-    f_name = args.rat_frat + '_conceptnet_search.xlsx'
-    if not os.path.exists('/conceptnet/output'):
-        os.mkdir('/conceptnet/output')
-    output.to_excel(os.path.join('/conceptnet/output/', f_name), index=False)
+    f_name = args.rat_frat + '_' + str(args.check) + '_conceptnet_search.xlsx'
+    dIr = os.path.join('output', args.rat_frat)
+    if not os.path.exists(dIr):
+        os.mkdir(dIr)
+    output.to_excel(os.path.join(dIr, f_name), index=False)
 
 def parse_args():
     parser = ArgumentParser(prog='concepnet search for rat or frat')
@@ -163,9 +156,7 @@ def get_output(result, query, relation_dict, ground_solution, has_solution):
             'relation_from_solution': ' | '.join(from_solution)}
 
 def compute(items):
-    global OUTPUT
-    global ACCURACY
-    index, query, df, args = items
+    index, query, df, args, OUTPUT, ACCURACY = items
     get_nodes = get_nodes_rat if args.rat_frat == 'rat' else get_nodes_frat
     solution = df.iloc[index].wans
     relation_dict = {}
@@ -193,9 +184,8 @@ def compute(items):
 
 def main():
     args = parse_args()
-    # get_conceptnet()
-    logging.basicConfig(filename='/mnt/data_transfer/write/' + args.rat_frat + '_conceptnet_search_logs.txt', level=logging.DEBUG)
-    # logging.basicConfig(filename=args.rat_frat + '_conceptnet_search_logs.txt', level=logging.DEBUG)
+    get_conceptnet()
+    logging.basicConfig(filename=args.rat_frat + '_conceptnet_search_logs.txt', level=logging.DEBUG)
 
     if args.rat_frat == 'rat': # csvs differ
         df = pd.read_csv(args.src)
@@ -205,19 +195,23 @@ def main():
     # [['question', 'reply', 'solution'], ... ['fault', 'incorrect', 'unjust']]
     queries = df.w1 + ' ' + df.w2 + ' ' + df.w3
     queries = [list(map(lambda x: x.lower(), filter(len, line.split(' ')))) for line in queries]
-
     pool = Pool(multiprocessing.cpu_count() - 1 or 1)
     pool.map(
             compute,
             zip(range(0, len(queries)),
                 queries,
                 repeat(df),
-                repeat(args)))
+                repeat(args),
+                repeat(OUTPUT),
+                repeat(ACCURACY)))
 
-    global OUTPUT
     OUTPUT.append({'Accuracy': str(round(100*ACCURACY['tp']/ACCURACY['total'], 2)) + '%'})
-    save_csv(args)
+    save_csv(args, OUTPUT)
 
 if __name__ == '__main__':
-    # freeze_support()
+    manager = Manager()
+    OUTPUT = manager.list()
+    ACCURACY= manager.dict()
+    ACCURACY['total'] = 0
+    ACCURACY['tp'] = 0
     main()
