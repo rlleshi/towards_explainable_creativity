@@ -4,3 +4,9 @@ Task: Next meeting Thursday
 cemetery, coma, noose : we can check for all possible solutions with path length 2 with all the combinations. 
 
 2. Would be really helpful if you can make a separate column for relationship name without is_a or part_of. Looks easy, but it hard. 
+
+15th Jun Task:
+1. RAT 2_combination error. 
+2. fRAT has_solution column having wrong 0 and 1 
+3. Path 2 solution compared with a Glove threshold to remove unrelated words. 
+4. Relationship segregation (is_a) or (related_to) 
