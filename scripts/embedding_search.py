@@ -1,7 +1,6 @@
-import os
 import re
-import time
 import itertools
+import logging
 
 import numpy as np
 import pandas as pd
@@ -72,7 +71,7 @@ def main():
             out_best.append('')
             filtered_solutions.append([' '])
             continue
-        # print('# Examining Nodes {} | Solutions: {}...'.format(nodes[i], solutions[i]))
+        # logging.info('# Examining Nodes {} | Solutions: {}...'.format(nodes[i], solutions[i]))
 
         result = ''
         sols = solutions[i].split(', ')
@@ -80,7 +79,7 @@ def main():
         curr_filtered_solutions = []
 
         for pair in itertools.product(nodes[i].split(', '), sols): # cartesian product
-            # print('## Examining {}'.format(pair))
+            # logging.info('## Examining {}'.format(pair))
             res = check_glove(g, pair)
             result += res
             val = re.findall('\d+\.\d+', res)
@@ -95,8 +94,8 @@ def main():
                 out_best.append(k)
         out.append(result)
         filtered_solutions.append(curr_filtered_solutions)
-
     update_df(args.file, out, out_best, filtered_solutions)
 
 if __name__ == '__main__':
+    # logging.basicConfig(filename='embedding_logging.txt', level=logging.DEBUG)
     main()
