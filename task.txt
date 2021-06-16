@@ -1,6 +1,6 @@
-1) 15th Jun Task:
+1) 15th June
 
-1. RAT 2_combination error. 
+1. fRAT 2_combination error. 
 2. fRAT has_solution column having wrong 0 and 1
 3. Path 2 solution compared with a Glove threshold to remove unrelated words. 
 4. Relationship segregation (is_a) or (related_to) 
@@ -14,5 +14,13 @@ Accuracy doesn't change, however, because it was just a jupyter notebook problem
 
 e.g. "reply, solution" might have wrongly had "statement" as a ground solution, where it should have been  "answer". However, if "statement" happens to be in the solutions, then it is comes as "has_solution = False" because the true solution is "answer".
 
-1. RAT 2_combination error. --> fixed
+1. fRAT 2_combination error. --> fixed
+
+3. Done
+
+
+
+2) 23th June
+
+1. Same for RAT
 
