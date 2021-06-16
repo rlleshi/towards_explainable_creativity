@@ -20,8 +20,8 @@ from sklearn.metrics.pairwise import cosine_similarity
 
 def parse_args():
     parser = ArgumentParser(prog='check cosine similarity for word embeddings')
-    parser.add_argument('File', metavar='file',
-                        type=str, help='csv file, rat or frat')
+    parser.add_argument('file', type=str, help='csv file, rat or frat')
+    parser.add_argument('--threshold', type=float, default=0.5)
     args = parser.parse_args()
     return args
 
@@ -38,14 +38,17 @@ def parse_file(file):
 def check_glove(g, pair):
     em1 = np.array(g.emb(pair[0])).reshape(1, -1)
     em2 = np.array(g.emb(pair[1])).reshape(1, -1)
-    if np.any(em1) is None: return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[0])
-    elif np.any(em2) is None: return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[1])
+    if np.any(em1) is None: 
+        return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[0])
+    elif np.any(em2) is None: 
+        return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[1])
     return '{} - {}: {}  |  '.format(pair[0], pair[1], round(cosine_similarity(em1, em2)[0][0], 3))
 
-def update_df(file, out, out_best):
+def update_df(file, out, out_best, new_solutions):
     df = pd.read_excel(file)
     df['embeddings'] = out
     df['top_embedding'] = out_best
+    df['solutions'] = ', '.join(sol for sol in new_solutions)
     try:
         df = df[['FrAt', 'ground solution', 'solutions', 'has_solution', 'embeddings', 'top_embedding', 'relation', 'Accuracy']]
     except KeyError:
@@ -54,14 +57,15 @@ def update_df(file, out, out_best):
     df.to_json(file.strip('.xlsx') + '_embeddings.json', indent=4)
     print('Saved output')
 
-if __name__ == '__main__':
+def main():
     args = parse_args()
     nodes, solutions = parse_file(args.File)
     start_time = time.time()
     g = GloveEmbedding('common_crawl_840', d_emb=300, show_progress=True)
     out = []
     out_best = []
-
+    new_solutions = []
+    
     for i in range(len(solutions)):
         if solutions[i] is None:
             out.append('')
@@ -78,13 +82,19 @@ if __name__ == '__main__':
             res = check_glove(g, pair)
             result += res
             val = re.findall('\d+\.\d+', res)
+            if val > args.threshold:
+                new_solutions.append(val)
             best_embd[pair[1]] += float(val[0]) if len(val) > 0 else 0
 
         mAx = max(best_embd.values())
         for k, v in best_embd.items():
-            if v == mAx: out_best.append(k)
+            if v == mAx: 
+                out_best.append(k)
         out.append(result)
 
         print('Timestamp: {}'.format(round(time.time()-start_time, 2)))
 
-    update_df(args.File, out, out_best)
+    update_df(args.File, out, out_best, new_solutions)
+
+if __name__ == '__main__':
+    main()
