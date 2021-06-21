@@ -1,10 +1,12 @@
-Task: Next meeting Thursday 
+1) 15th June
 
-1. For combinations with no solutions we can take a path back. Like instead of direct connections, we can see for path length 2. 
-cemetery, coma, noose : we can check for all possible solutions with path length 2 with all the combinations. 
+1. fRAT 2_combination error. 
+2. fRAT has_solution column having wrong 0 and 1
+3. Path 2 solution compared with a Glove threshold to remove unrelated words. 
+4. Relationship segregation (is_a) or (related_to) 
 
-2. Would be really helpful if you can make a separate column for relationship name without is_a or part_of. Looks easy, but it hard. 
 
+<<<<<<< HEAD
 15th Jun Task:
 1. RAT 2_combination error. 
 2. fRAT has_solution column having wrong 0 and 1 
@@ -13,3 +15,23 @@ cemetery, coma, noose : we can check for all possible solutions with path length
 
 21st Jun Task:
 1. Instead of using a thresold to remove unwanted words/nodes(solutions column) in path pf length 2 in fRAT, order the words/nodes based on thresold value(highest to lowest) and then print the top 10 nodes. 
+=======
+Update (1): 
+
+2. fRAT has_solution column having wrong 0 and 1 --> fixed. TL;DR; a printing problem
+
+Accuracy doesn't change, however, because it was just a jupyter notebook problem which caused the ground_solution itself to be printed wrong
+
+e.g. "reply, solution" might have wrongly had "statement" as a ground solution, where it should have been  "answer". However, if "statement" happens to be in the solutions, then it is comes as "has_solution = False" because the true solution is "answer".
+
+1. fRAT 2_combination error. --> fixed
+
+3. Done
+
+
+
+2) 23th June
+
+1. Same for RAT
+
+>>>>>>> b5ee91562a36cb8ce2cd7cad07bfa8f3621613ee
