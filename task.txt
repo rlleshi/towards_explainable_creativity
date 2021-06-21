@@ -29,5 +29,9 @@ e.g. "reply, solution" might have wrongly had "statement" as a ground solution, 
 
 1. Instead of using a threshold to remove unwanted words/nodes(solutions column) in path pf length 2 in fRAT, order the words/nodes based on threshold value(highest to lowest) and then print the top 10 nodes. 
 2. Same for RAT
-4. Relationship segregation (is_a) or (related_to) 
+3. filter relation accordingly
+4. update has_solution, accuracy
+5. Relationship segregation (is_a) or (related_to) 
+
+
 
