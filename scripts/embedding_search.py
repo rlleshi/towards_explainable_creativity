@@ -7,23 +7,28 @@ import pandas as pd
 
 from tqdm import tqdm
 from argparse import ArgumentParser
-from embeddings import GloveEmbedding, FastTextEmbedding, KazumaCharEmbedding, ConcatEmbedding
+from embeddings import GloveEmbedding
 from sklearn.metrics.pairwise import cosine_similarity
 
-###
-# The Cosine Similarity between two word vectors provides an effective method for reassuring the linguistic or semantic similarity
-# of the correspoinding words. Sometimes, the nearest neighbors according to this metric reveal rare but relevant words that lie outside
-# an average human's vocabulary.
+# Motivation
+# The Cosine Similarity between two word vectors provides an effective method
+# for reassuring the linguistic or semantic similarity of the correspoinding words
+# Sometimes, the nearest neighbors according to this metric reveal rare but relevant
+# words that lie outside an average human's vocabulary.
 # GloVe: https://nlp.stanford.edu/projects/glove/
-#
-###
+
 
 def parse_args():
     parser = ArgumentParser(prog='check cosine similarity for word embeddings')
     parser.add_argument('file', type=str, help='csv file, rat or frat')
-    parser.add_argument('--threshold', type=float, default=0.5)
+    parser.add_argument(
+        '--top-k',
+        type=int,
+        default=10,
+        help='pick top-k embeddings')
     args = parser.parse_args()
     return args
+
 
 def parse_file(file):
     df = pd.read_excel(file, engine='openpyxl')
@@ -39,10 +44,11 @@ def check_glove(g, pair):
     em1 = np.array(g.emb(pair[0])).reshape(1, -1)
     em2 = np.array(g.emb(pair[1])).reshape(1, -1)
     if np.any(em1) is None:
-        return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[0])
+        return f'{pair[0]} - {pair[1]}: no embedding for {pair[0]}  |  '
     elif np.any(em2) is None:
-        return '{} - {}: no embedding for {}  |  '.format(pair[0], pair[1], pair[1])
-    return '{} - {}: {}  |  '.format(pair[0], pair[1], round(cosine_similarity(em1, em2)[0][0], 3))
+        return f'{pair[0]} - {pair[1]}: no embedding for {pair[1]}  |  '
+    return f'{pair[0]} - {pair[1]}: {round(cosine_similarity(em1, em2)[0][0], 3)}  |  '
+
 
 def update_df(file, out, out_best, new_solutions):
     df = pd.read_excel(file, engine='openpyxl')
@@ -57,45 +63,45 @@ def update_df(file, out, out_best, new_solutions):
     df.to_json(file.strip('.xlsx') + '_embeddings.json', indent=4)
     print('Saved output')
 
+
 def main():
     args = parse_args()
     nodes, solutions = parse_file(args.file)
     g = GloveEmbedding('common_crawl_840', d_emb=300, show_progress=True)
-    out = []
-    out_best = []
+    embeddings = []
+    embeddings_best = []
     filtered_solutions = []
 
     for i in tqdm(range(len(solutions))):
         if solutions[i] is None:
-            out.append('')
-            out_best.append('')
+            embeddings.append('')
+            embeddings_best.append('')
             filtered_solutions.append([' '])
             continue
-        # logging.info('# Examining Nodes {} | Solutions: {}...'.format(nodes[i], solutions[i]))
+        logging.info('# Examining Nodes {} | Solutions: {}...'.format(nodes[i], solutions[i]))
 
-        result = ''
+        embd_msg = ''
         sols = solutions[i].split(', ')
-        best_embd = {sol: 0 for sol in sols}
-        curr_filtered_solutions = []
+        embd_best_temp = {sol: 0 for sol in sols}
 
-        for pair in itertools.product(nodes[i].split(', '), sols): # cartesian product
-            # logging.info('## Examining {}'.format(pair))
+        # cartesian product between 3 nodes of queries & solutions
+        for pair in itertools.product(nodes[i].split(', '), sols):
+            logging.info('## Examining {}'.format(pair))
             res = check_glove(g, pair)
-            result += res
-            val = re.findall('\d+\.\d+', res)
-            if len(val) > 0:
-                if (float(val[0]) > args.threshold) & (pair[1] not in curr_filtered_solutions):
-                    curr_filtered_solutions.append(pair[1])
-            best_embd[pair[1]] += float(val[0]) if len(val) > 0 else 0
+            embd_msg += res
+            embd_value = re.findall('\d+\.\d+', res)
+            embd_best_temp[pair[1]] += float(embd_value[0]) if len(embd_value) > 0 else 0
 
-        mAx = max(best_embd.values())
-        for k, v in best_embd.items():
-            if v == mAx:
-                out_best.append(k)
-        out.append(result)
-        filtered_solutions.append(curr_filtered_solutions)
-    update_df(args.file, out, out_best, filtered_solutions)
+        # ! Fix order (desc not asc)
+        embd_best_temp = sorted(embd_best_temp.items(), key=lambda x: x[1])
+        embeddings_best.append(embd_best_temp[0][0])
+        embeddings.append(embd_msg)
+        # top-k embeddings
+        top_k = args.top_k if len(embd_best_temp) > args.top_k else len(embd_best_temp)
+        filtered_solutions.append([embd_best_temp[i][0] for i in range(top_k)])
+
+    update_df(args.file, embeddings, embeddings_best, filtered_solutions)
 
 if __name__ == '__main__':
-    # logging.basicConfig(filename='embedding_logging.txt', level=logging.DEBUG)
+    logging.basicConfig(filename='embedding_logging.txt', level=logging.DEBUG)
     main()
