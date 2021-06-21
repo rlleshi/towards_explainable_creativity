@@ -6,6 +6,16 @@
 4. Relationship segregation (is_a) or (related_to) 
 
 
+<<<<<<< HEAD
+15th Jun Task:
+1. RAT 2_combination error. 
+2. fRAT has_solution column having wrong 0 and 1 
+3. Path 2 solution compared with a Glove threshold to remove unrelated words. 
+4. Relationship segregation (is_a) or (related_to) 
+
+21st Jun Task:
+1. Instead of using a thresold to remove unwanted words/nodes(solutions column) in path pf length 2 in fRAT, order the words/nodes based on thresold value(highest to lowest) and then print the top 10 nodes. 
+=======
 Update (1): 
 
 2. fRAT has_solution column having wrong 0 and 1 --> fixed. TL;DR; a printing problem
@@ -24,3 +34,4 @@ e.g. "reply, solution" might have wrongly had "statement" as a ground solution, 
 
 1. Same for RAT
 
+>>>>>>> b5ee91562a36cb8ce2cd7cad07bfa8f3621613ee
