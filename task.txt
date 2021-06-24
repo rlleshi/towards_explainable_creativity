@@ -17,3 +17,8 @@
 
 5. Same for RAT
 
+
+24th Jun 
+Going through the output:
+1. Row 50 - "Why FALSE?"
+2. The explanations in the column name "relation" still have related_to or is_a. However not the way around.  
