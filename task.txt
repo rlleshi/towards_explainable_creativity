@@ -19,6 +19,5 @@
 
 
 24th Jun 
-Going through the output:
-1. Row 50 - "Why FALSE?"
-2. The explanations in the column name "relation" still have related_to or is_a. However not the way around.  
+1. So use GloVe embedding to find the top similar words. 
+That is, suppose the query is question, reply, solution, use Glove emdedding to retrive all the words that are similar(maybe with a thresold 0,5), and then the intersection and see the top 10. 
