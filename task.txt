@@ -20,4 +20,5 @@
 
 24th Jun 
 1. So use GloVe embedding to find the top similar words. 
-That is, suppose the query is question, reply, solution, use Glove emdedding to retrive all the words that are similar(maybe with a thresold 0,5), and then the intersection and see the top 10. 
+That is, suppose the query is question, reply, solution, use Glove emdedding to retrive all the words that are similar(maybe with a thresold 0,5), and 
+then the intersection and see the top 10. 
