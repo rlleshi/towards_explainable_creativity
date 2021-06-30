@@ -1,0 +1,13 @@
+1. fRAT updated file with 2_conceptnet 
+Row 5 - where are the other entries?  Same for line 14,15 ,16 .. 
+I think what’s happening is - 3 word convergence are show. (Example you can see for question, reply and solution all the three combinations are shown since they have 3 word convergence. 
+Same is happening in 2,3 word_convergence file too
+
+2. Row 50 in frat - "Why FALSE?" - if this is removed manually  the accuracy is still fine ? 
+
+3. The explanations in the column name "relation" still have related_to or is_a. 
+I wanted some seperate column which doesn't have the relationship labelled as related_to or is_a . This will enable me to see interesting relationship between the edges. 
+That is 
+One column- without is_a or related_to relationship (rest all the relationships between the edges) 
+One column only which has all the relationships with is_ a
+And one column only with related_to
