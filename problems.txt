@@ -11,3 +11,5 @@ That is
 One column- without is_a or related_to relationship (rest all the relationships between the edges) 
 One column only which has all the relationships with is_ a
 And one column only with related_to
+
+4. in the file depth_1 fRAT_check_2,3 is your row 24 column ground_solution has kind instead of king? 
