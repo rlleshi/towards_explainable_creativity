@@ -22,3 +22,7 @@
 1. So use GloVe embedding to find the top similar words. 
 That is, suppose the query is question, reply, solution, use Glove emdedding to retrive all the words that are similar(maybe with a thresold 0,5), and 
 then the intersection and see the top 10. 
+
+5th Jul
+1. Oder the top_embeddings_0,25_10top file. The top embeddings column based on the similarity score. 
+2. Check whether the top_embedding column has the answer from the column wans. (Calculate the accuracy)
