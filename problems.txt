@@ -13,3 +13,5 @@ One column only which has all the relationships with is_ a
 And one column only with related_to
 
 4. in the file depth_1 fRAT_check_2,3 is your row 24 column ground_solution has kind instead of king? 
+
+4. in the file depth_1 fRAT_check_3 row 16 ground solution "run" and solution "run", yet has_solution "FALSE"
