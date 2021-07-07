@@ -5,33 +5,24 @@
 3. Path 2 solution compared with a Glove threshold to remove unrelated words. 
 4. Relationship segregation (is_a) or (related_to) 
 
-
-15th Jun Task:
-1. RAT 2_combination error. 
-2. fRAT has_solution column having wrong 0 and 1 
-3. Path 2 solution compared with a Glove threshold to remove unrelated words. 
-4. Relationship segregation (is_a) or (related_to) 
-
-
-2. fRAT has_solution column having wrong 0 and 1 --> fixed. TL;DR; a printing problem
-
-Accuracy doesn't change, however, because it was just a jupyter notebook problem which caused the ground_solution itself to be printed wrong
-
-e.g. "reply, solution" might have wrongly had "statement" as a ground solution, where it should have been  "answer". However, if "statement" happens to be in the solutions, then it is comes as "has_solution = False" because the true solution is "answer".
-
-1. fRAT 2_combination error. --> fixed
-
-3. Done
-
-
-
 2) 23th June
 
-1. Instead of using a threshold to remove unwanted words/nodes(solutions column) in path pf length 2 in fRAT, order the words/nodes based on threshold value(highest to lowest) and then print the top 10 nodes. 
-2. Same for RAT
-3. filter relation accordingly
-4. update has_solution, accuracy
-5. Relationship segregation (is_a) or (related_to) 
+1. Instead of using a threshold to remove unwanted words/nodes(solutions column) in path pf length 2 in fRAT, 
+   order the words/nodes based on threshold value(highest to lowest) and then print the top 10 nodes. 
+2. filter relation accordingly
+3. update has_solution, accuracy
+4. Relationship segregation (is_a) or (related_to) 
+
+=== Finished up to (5)
+
+5. Same for RAT
 
 
+24th Jun 
+1. So use GloVe embedding to find the top similar words. 
+That is, suppose the query is question, reply, solution, use Glove emdedding to retrive all the words that are similar(maybe with a thresold 0,5), and 
+then the intersection and see the top 10. 
 
+5th Jul
+1. Oder the top_embeddings_0,25_10top file. The top embeddings column based on the similarity score. 
+2. Check whether the top_embedding column has the answer from the column wans. (Calculate the accuracy)
