@@ -1,7 +1,6 @@
 Templates: 
 
 
-
 "Related To" :      {0} is like {1} 
                     {0} is related to {1}
 
