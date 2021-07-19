@@ -1,35 +1,38 @@
 Templates: 
 
 
-"Related To" :      {0} is like {1} 
+"Related To" - "related_to" :      {0} is like {1} 
                     {0} is related to {1}
 
-"Is A":             {0} is {1} 
+"Is A" - "is_a":             {0} is {1} 
                     {0} is a {1}
                 
-"Part Of":          {0} is a part of {1}
+"Part Of" - "part_of":          {0} is a part of {1}
 
-"Used For":         You can use {0} for {1}
+"Used For" - "used_for":         You can use {0} for {1}
                     You can use {0} to {1}
                     {0} is used to {1}
                 
-"Capable Of":       {0} can {1}
+"Capable Of" - "capable_of":       {0} can {1}
 
-"AtLocation":       You are likely to find {0} in {1}
+"AtLocation" - "at_location":       You are likely to find {0} in {1}
 
-"Causes":           The effect of {0} is {1}
+"Causes" - "causes":           The effect of {0} is {1}
 
-"HasSubevent":      Something you might do while {0} is {1}
+"HasSubevent" - "has_subevent":      Something you might do while {0} is {1}
 
-"Desire":           {0} wants {1}
+"Desire" - "desires":           {0} wants {1}
 
-"Synonyms":         {0} and {1} have similar meanings 
+"Synonyms" - "synonym":         {0} and {1} have similar meanings 
 
-"Antonyms":         {0} is the opposite of {1}
+"Antonyms" - "antonym":         {0} is the opposite of {1}
 
-"Distinct From":    it cannot be both {0} and {1}
+"Distinct From" - "distinct_from":    it cannot be both {0} and {1}
 
-"EtymologicallyRelatedTo": "the word {0} and the word {1} have the same origin"
+"EtymologicallyRelatedTo" - "etymologically_related_to": "the word {0} and the word {1} have the same origin"
 
-"CausesDesires":    {0} makes people want {1}
-                
+"CausesDesires" - "causes_desires":    {0} makes people want {1}
+
+
+
+bench is "distinct_from, related_to" to chair | sofa is "is_a, distinct_from, related_to" to chair | stool is "is_a, synonym, antonym, related_to, etymologically_related_to" to chair
