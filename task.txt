@@ -38,3 +38,5 @@ relationship:   question ----- answer
                 reply ----- answer 
                 solution --- answer 
 (0r the other way around). not required with other words in solution column. 
+
+2. All the nodes that are connected to question, reply and solution (path of length 1) 
