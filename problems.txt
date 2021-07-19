@@ -6,7 +6,7 @@ Same is happening in 2,3 word_convergence file too
 2. Row 50 in frat - "Why FALSE?" - if this is removed manually  the accuracy is still fine ? 
 
 3. The explanations in the column name "relation" still have related_to or is_a. 
-I wanted some seperate column which doesn't have the relationship labelled as related_to or is_a . This will enable me to see interesting relationship between the edges. 
+I wanted some seperate column which doesn't have the relationship labelled as related_tox or is_a . This will enable me to see interesting relationship between the edges. 
 That is 
 One column- without is_a or related_to relationship (rest all the relationships between the edges) 
 One column only which has all the relationships with is_ a

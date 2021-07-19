@@ -15,8 +15,6 @@
 
 === Finished up to (5)
 
-LEFT: 5. Same for RAT
-
 
 24th Jun 
 1. So use GloVe embedding to find the top similar words. 
@@ -27,6 +25,9 @@ then the intersection and see the top 10.
 1. Oder the top_embeddings_0,25_10top file. The top embeddings column based on the similarity score. 
 2. Check whether the top_embedding column has the answer from the column wans. (Calculate the accuracy)
 
+
+===
+Look 5th July
 
 19th Jul:
 1. Use template.txt file for creating a better relationship explanation for frat_3_conceptnet file top_embedding column. 
