@@ -15,3 +15,8 @@ And one column only with related_to
 4. in the file depth_1 fRAT_check_2,3 is your row 24 column ground_solution has kind instead of king? 
 
 4. in the file depth_1 fRAT_check_3 row 16 ground solution "run" and solution "run", yet has_solution "FALSE"
+
+
+
+----------------------- 
+1. (just for relation) When looking for bi-directions are we neglecting the complete directions (meaning making the conceptNet undirected?) In that case I don't want to make undirected, instead we can see whether {0} is connected to {1} or {1} is connected to {0} {1}{0} being the initial queries. So we can remove all the unnecessary comments like hand is a part of finger (since finger would be connected to hand) 
