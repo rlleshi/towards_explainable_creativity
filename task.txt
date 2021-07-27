@@ -41,3 +41,12 @@ relationship:   question ----- answer
 (0r the other way around). not required with other words in solution column. 
 
 2. All the nodes that are connected to question, reply and solution (path of length 1) 
+
+
+------------------
+1. All the nodes that are connected to question, reply and solution (path of length 1) - just send me the output 
+
+2. Can you also use gensim to find the output. with this: 
+rained_model.most_similar and positive being our initial test query and negative empty. You can print the top 10, top 5 and top 3. (For comparing with Glove and Gensim). So the top 10, top 5, top 3 should be checked with the ground solutions. 
+
+3. top_embeddings_0.25thr_10topk has_solution column is False. 
