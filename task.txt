@@ -50,3 +50,10 @@ relationship:   question ----- answer
 rained_model.most_similar and positive being our initial test query and negative empty. You can print the top 10, top 5 and top 3. (For comparing with Glove and Gensim). So the top 10, top 5, top 3 should be checked with the ground solutions. 
 
 3. top_embeddings_0.25thr_10topk has_solution column is False. 
+
+4. Can I have the similarity score of these following queries (the answer retrived via word embedding: GloVe and Gensim)
+question, reply, solution
+antlers, dow, fawn,
+bud, dandelion, petel
+discuss, gossip, telephone
+bench, sofa, stool
