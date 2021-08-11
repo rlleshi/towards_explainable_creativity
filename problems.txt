@@ -22,4 +22,4 @@ And one column only with related_to
 1. (just for relation) When looking for bi-directions are we neglecting the complete directions (meaning making the conceptNet undirected?) In that case I don't want to make undirected, instead we can see whether {0} is connected to {1} or {1} is connected to {0} {1}{0} being the initial queries. So we can remove all the unnecessary comments like hand is a part of finger (since finger would be connected to hand) 
 
 2. File frat_2,3_conceptnet_search(dept 1) - line 67 (drill, grave) - why no other combinations. same for line 47. 
-when you see 46 finger, golve, palm: all the combinations are present. (Is it because only true value is printed?)
+when you see 46 finger, golve, palm: all the combinations are present. (Is it because only true value is printed?) How is this file accuracy calculated? The number of functional RAT queries that are answered correctly is 16,5 queries? 
