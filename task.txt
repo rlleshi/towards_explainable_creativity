@@ -59,3 +59,5 @@ discuss, gossip, telephone
 bench, sofa, stool
 
 5. Can I also have the output for FALSE. All the false answer that the conceptNet provides? 
+
+6. All the nodes that are connected to marsh, saliva, slippery (path of length 2) - just send me the output 
