@@ -26,3 +26,9 @@ when you see 46 finger, golve, palm: all the combinations are present. (Is it be
 
 3. /output/frat/depth_2/embeddings/ frat_3_conceptnet_search_embeddings-top3
 top 3 : then why only 1 node in the first query?Is there a thresold? What is the thresold we set? 
+
+4. file: depth_2/embeddings/frat_3_conceptnet_search_embeddings-top10
+query: dictionary, verse, vocabulary 
+top_10answer: dictionary, word, grammar, language, thesaurus, phrase, words, translation, meaning, idiom
+
+why query word dictionary is in top_10 answer. I see it for other queries too. example row 13,25 .. 
