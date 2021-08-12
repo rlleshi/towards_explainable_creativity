@@ -43,7 +43,7 @@ relationship:   question ----- answer
 2. All the nodes that are connected to question, reply and solution (path of length 1) 
 
 
-------------------
+------------------ Look into this first --------------------------------
 1. All the nodes that are connected to question, reply and solution (path of length 1) - just send me the output 
 
 2. Can you also use gensim to find the output. with this: 
@@ -57,3 +57,5 @@ antlers, dow, fawn,
 bud, dandelion, petel
 discuss, gossip, telephone
 bench, sofa, stool
+
+5. Can I also have the output for FALSE. All the false answer that the conceptNet provides? 
