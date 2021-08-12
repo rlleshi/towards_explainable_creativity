@@ -23,3 +23,6 @@ And one column only with related_to
 
 2. File frat_2,3_conceptnet_search(dept 1) - line 67 (drill, grave) - why no other combinations. same for line 47. 
 when you see 46 finger, golve, palm: all the combinations are present. (Is it because only true value is printed?) How is this file accuracy calculated? The number of functional RAT queries that are answered correctly is 16,5 queries? 
+
+3. /output/frat/depth_2/embeddings/ frat_3_conceptnet_search_embeddings-top3
+top 3 : then why only 1 node in the first query?Is there a thresold? What is the thresold we set? 
