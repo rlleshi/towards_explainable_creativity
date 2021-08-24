@@ -37,7 +37,7 @@ def parse_args():
     parser.add_argument(
         '--threshold',
         type=float,
-        default=0.25,
+        default=0.1,
         help='threshold for cosine similarity')
     parser.add_argument(
         '--top-k',
@@ -75,7 +75,7 @@ def has_solution(ground, result):
             continue
 
         if any(
-            edit_distance(tup[0].strip(), sol) < 2 for sol in tup[1].split(',')):
+            edit_distance(tup[0].strip(), sol) < 2 for sol in tup[1].split(', ')):
             has_solution.append(True)
         else:
             has_solution.append(False)
@@ -92,7 +92,7 @@ def save_output(args, result):
         df['has_solution'].value_counts()[True] / (len(df['has_solution']) - 1), 3)) + '%'
     df = df[['w1', 'w2', 'w3', 'wans', 'has_solution', 'Top Embeddings', 'Accuracy']]
 
-    df.to_excel(f'top_embeddings_{args.threshold}thr_{args.top_k}topk.xlsx')
+    df.to_excel(f'top_embeddings_top{args.top_k}.xlsx')
 
 
 def main():
@@ -110,8 +110,11 @@ def main():
         for node in triple:
             temp = []
             for noun in nouns:
+                if noun in node:
+                    continue
                 if check_glove(g, node.strip(), noun) > args.threshold:
                     temp.append(noun)
+
             triple_result.append(temp)
 
         # pick top-k from the intersection

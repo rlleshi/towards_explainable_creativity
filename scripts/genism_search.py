@@ -24,7 +24,7 @@ def has_solution(ground, result):
             continue
 
         if any(
-            edit_distance(tup[0].strip(), sol) < 2 for sol in tup[1].split(',')):
+            edit_distance(tup[0].strip(), sol) < 2 for sol in tup[1].split(', ')):
             has_solution.append(True)
         else:
             has_solution.append(False)
@@ -37,13 +37,10 @@ def save_output(args, result):
     df['has_solution'] = has_solution(df['wans'], result)
     df = df[['w1', 'w2', 'w3', 'wans', 'has_solution', 'Gensim']]
 
-    # try:
     df['Accuracy'] = ''
     df['Accuracy'].iloc[-1] = str(100*round(
         df['has_solution'].value_counts()[True] / (len(df['has_solution'])), 3)) + '%'
     df = df[['w1', 'w2', 'w3', 'wans', 'has_solution', 'Gensim', 'Accuracy']]
-    # except KeyError:
-    #     pass
 
     df.to_excel(f'gensim_top{args.top_k}.xlsx')
 
