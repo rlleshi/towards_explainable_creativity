@@ -30,3 +30,5 @@ For every noun in the English language (65k taken from WordNet), get the embeddi
 
 ## Gensim search
 Find the intersection of the queries based on [CenceptNet Numberbatch](https://github.com/commonsense/conceptnet-numberbatch). Find top3, top5, top10 solutions.
+
+In order to use the script you must first download the conceptnet-numberbatch model (link in `resources/`), unzip the model and convert it using the `misc/number_batch_converter.py` script.
