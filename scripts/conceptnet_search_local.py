@@ -11,7 +11,7 @@ from multiprocessing import Pool, Manager, freeze_support
 from conceptnet_lite import Label, edges_between, edges_for
 
 #
-# Multiprocessing doesn't work because the conceptnet_lite library did not implement it
+# ! Multiprocessing doesn't work because the conceptnet_lite library did not implement it
 START_TIME = time.time()
 #
 

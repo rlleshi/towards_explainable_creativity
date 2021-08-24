@@ -1,5 +1,8 @@
 .DS_Store
 
+# Numberbatch Conceptnet
+resources/numberbatch-en-17.04b.txt
+
 # database
 conceptnet_database.db
 

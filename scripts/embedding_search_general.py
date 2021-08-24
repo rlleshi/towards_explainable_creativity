@@ -74,7 +74,6 @@ def has_solution(ground, result):
         if str(tup[0]) == 'nan':
             continue
 
-        # ! why do we need levenshtein here? why won't simple equality work?
         if any(edit_distance(tup[0].strip(), sol) < 2 for sol in tup[1]):
             has_solution.append(True)
         else:
@@ -101,6 +100,7 @@ def main():
     args = parse_args()
     # TODO Try other embeddings
     g = GloveEmbedding('common_crawl_840', d_emb=300, show_progress=True)
+    # get nouns from wordnet
     nouns = list({x.name().split('.', 1)[0] for x in wn.all_synsets('n')})
     global CACHE
     result = []

@@ -1,0 +1,2 @@
+NLP MODEL DOWNLOAD LINK
+https://www.google.com/url?q=http%3A%2F%2Fconceptnet.s3.amazonaws.com%2Fdownloads%2F2017%2Fnumberbatch%2Fnumberbatch-en-17.04b.txt.gz&sa=D&sntz=1&usg=AFQjCNEOK9qt9zI00rT6x34bEaue0VHnsQ
