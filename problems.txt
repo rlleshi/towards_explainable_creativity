@@ -1,0 +1,34 @@
+1. fRAT updated file with 2_conceptnet 
+Row 5 - where are the other entries?  Same for line 14,15 ,16 .. 
+I think what’s happening is - 3 word convergence are show. (Example you can see for question, reply and solution all the three combinations are shown since they have 3 word convergence. 
+Same is happening in 2,3 word_convergence file too
+
+2. Row 50 in frat - "Why FALSE?" - if this is removed manually  the accuracy is still fine ? 
+
+3. The explanations in the column name "relation" still have related_to or is_a. 
+I wanted some seperate column which doesn't have the relationship labelled as related_tox or is_a . This will enable me to see interesting relationship between the edges. 
+That is 
+One column- without is_a or related_to relationship (rest all the relationships between the edges) 
+One column only which has all the relationships with is_ a
+And one column only with related_to
+
+4. in the file depth_1 fRAT_check_2,3 is your row 24 column ground_solution has kind instead of king? 
+
+4. in the file depth_1 fRAT_check_3 row 16 ground solution "run" and solution "run", yet has_solution "FALSE"
+
+
+
+----------------------- 
+1. (just for relation) When looking for bi-directions are we neglecting the complete directions (meaning making the conceptNet undirected?) In that case I don't want to make undirected, instead we can see whether {0} is connected to {1} or {1} is connected to {0} {1}{0} being the initial queries. So we can remove all the unnecessary comments like hand is a part of finger (since finger would be connected to hand) 
+
+2. File frat_2,3_conceptnet_search(dept 1) - line 67 (drill, grave) - why no other combinations. same for line 47. 
+when you see 46 finger, golve, palm: all the combinations are present. (Is it because only true value is printed?) How is this file accuracy calculated? The number of functional RAT queries that are answered correctly is 16,5 queries? 
+
+3. /output/frat/depth_2/embeddings/ frat_3_conceptnet_search_embeddings-top3
+top 3 : then why only 1 node in the first query?Is there a thresold? What is the thresold we set? 
+
+4. file: depth_2/embeddings/frat_3_conceptnet_search_embeddings-top10
+query: dictionary, verse, vocabulary 
+top_10answer: dictionary, word, grammar, language, thesaurus, phrase, words, translation, meaning, idiom
+
+why query word dictionary is in top_10 answer. I see it for other queries too. example row 13,25 .. 
