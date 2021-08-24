@@ -1,6 +1,15 @@
 # Towards Explainable Creativity: Tackling The Remote Association Test With Knowledge Graphs
 
-15.02.2021 - 15.09.2021
+*TimeFrame: 15.02.2021 - 15.09.2021*
+
+# Results
+
+| Model | Accuracy_1 | Accuracy_2 | Accuracy_3 |
+| ------ | ------ | ------ | ------ |
+| conceptnet-search-local | frat_3_depth_1: *27.08%*; frat_3_depth_2: *83.33%*| frat_2,3_depth_1: *62.5%*; frat_2,3_depth_2: *86.98%* | frat_2_depth_1: *62.5%*; frat_2_depth_2: *88.19%* |
+| embedding-search-local | frat_3_depth_1: *25.0%*; frat_top_3_depth_2: *54.2%* | frat_2,3_depth_1: *62.5%*; frat_top_5_depth_2: *64.6%* | frat_2_depth_1: *37.5%*; frat_top_10_depth_2: *70.8%* |
+| embedding-search-general | for running the methods as a seldon-core service used in the future |
+| genism-search | for running the methods as a seldon-core service used in the future |
 
 The code for this thesis focuses on the following
 
