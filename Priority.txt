@@ -4,6 +4,7 @@ So the top 10, top 5, top 3 should be checked with the ground solutions.
 
 2. all_embeddings_noun/top_embeddings_0.25thr_10topk
 In this file I see the query word also in the embeddings column. I can remove manually, but there is no problem in the code right?
+
 and also for that file I would need how many times the wans is in top 3 /top 5 or top 10
 
 that is,

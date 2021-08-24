@@ -1,9 +1,8 @@
 .DS_Store
 
 # converted conceptnet
-./conceptNet
-./conceptNet.vectors.npy
-
+conceptNet
+conceptNet.vectors.npy
 
 # Numberbatch Conceptnet
 resources/numberbatch-en-17.04b.txt
