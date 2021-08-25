@@ -24,3 +24,19 @@ so the system provides that
 1/3 queries the answer is found in top 5
 
 3. All the nodes that are connected to marsh, saliva, slippery (path of length 2) - just send me the output
+
+4. Using two word intersection: (you will get this file while executing with both TRue and FALSE)
+For example, with the functional RAT query: FLU, NAUSEOUS, VIRUS 
+connected (wa, wb) = sick
+connected (wb, wc) = virose
+connected (wc, wa) = disease, influenza, person 
+Wans = sick, virose, disease, influenza, person 
+
+where Wans is a collection of all the answers. 
+Similarity score should be calculated for all the Wans with the functial RAT word and the highest average is found as the top_embedding
+when you see the query astronomy, moon,twinkle:
+you will need to calculate the similarity score only between lunar, sun, planetary, planet, eclipse, jupiter, zodiac, universe, sphere, apollo, star, scintillation, celestial_body, sky, bright, light, star, celestial_body
+and find which node has the highest average. 
+
+Master_thesis/r_m_thesis/output/frat/conceptnetlocal_embedding_search/depth_1/embeddings/frat_updated_2,3_conceptnet_search_embeddings 
+accuracy? Is it because the accuracy is not calculated based on whole functional RAT query
