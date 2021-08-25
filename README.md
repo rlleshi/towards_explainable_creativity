@@ -8,7 +8,7 @@
 | ------ | ------ | ------ | ------ |
 | conceptnet-search-local | frat_3_depth_1: *27.08%*; frat_3_depth_2: *83.33%*| frat_2,3_depth_1: *62.5%*; frat_2,3_depth_2: *86.98%* | frat_2_depth_1: *62.5%*; frat_2_depth_2: *88.19%* |
 | embedding-search-local | frat_3_depth_1: *25.0%*; frat_top_3_depth_2: *54.2%* | frat_2,3_depth_1: *62.5%*; frat_top_5_depth_2: *64.6%* | frat_2_depth_1: *37.5%*; frat_top_10_depth_2: *70.8%* |
-| embedding-search-general | for running the methods as a seldon-core service used in the future |
+| embedding-search-general | frat_top_3: *50.0%*| frat_top_5: *54.2%*| frat_top3: *58.3%*|
 | genism-search | frat_top_3: *16.7%* | frat_top_5: *18.8%* | frat_top_10: *31.2%* |
 
 The code for this thesis focuses on the following
