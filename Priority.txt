@@ -40,3 +40,5 @@ and find which node has the highest average.
 
 Master_thesis/r_m_thesis/output/frat/conceptnetlocal_embedding_search/depth_1/embeddings/frat_updated_2,3_conceptnet_search_embeddings 
 accuracy? Is it because the accuracy is not calculated based on whole functional RAT query
+
+5. number of nodes does question, reply, solution have with path length 1 and number of nodes do they have in path length 2 and number of intersection. 
