@@ -1,4 +1,3 @@
-
 Research Question 1: "To build a AI model to solve functional RAT"
 ----------------------------------------------------------------------------------------------
 
