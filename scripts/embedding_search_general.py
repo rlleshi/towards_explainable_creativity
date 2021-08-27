@@ -53,6 +53,7 @@ def check_glove(g, node, noun):
     if np.any(em1) is None:
         return 0
 
+    global CACHE
     if CACHE.get(noun, None) is not None:
         em2 = CACHE[noun]
     else:

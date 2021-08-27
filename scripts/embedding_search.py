@@ -1,6 +1,7 @@
 import re
 import itertools
 import logging
+import os.path as osp
 
 import numpy as np
 import pandas as pd
@@ -28,16 +29,18 @@ def parse_args():
         type=int,
         default=10,
         help='pick top-k embeddings')
+    parser.add_argument(
+        '--merge-triple-tuple',
+        action='store_true',
+        help='consider the solutions of each tuple as part of the parent triple')
     args = parser.parse_args()
     return args
 
 
 def parse_file(file):
     df = pd.read_excel(file, engine='openpyxl')
-    try:
-        nodes = [node if type(node) is str else None for node in df.FrAt]
-    except AttributeError:
-        nodes = [node if type(node) is str else None for node in df.RAT]
+    df = df[df['FrAt'].notna()]
+    nodes = [node if type(node) is str else None for node in df.FrAt]
     solutions = [sol if type(sol) is str else None for sol in df.solutions]
     return nodes, solutions
 
@@ -108,30 +111,60 @@ def separate_relations(relations):
     return is_a, related_to, rest
 
 
-def update_df(file, embeddings, embeddings_best, filtered_solutions):
-    df = pd.read_excel(file, engine='openpyxl')
+def update_df(args, embeddings, embeddings_best, filtered_solutions):
+    df = pd.read_excel(args.file, engine='openpyxl')
+    df = df[df['FrAt'].notna()]
+    if args.merge_triple_tuple:
+        # only triples come as end result
+        df = df[df['FrAt'].apply(lambda x: len(x.split(', ')) == 3)]
+
     df['embeddings'] = embeddings
     df['top_embedding'] = embeddings_best
     df['solutions'] = [', '.join(sol for sol in solution) for solution in filtered_solutions]
     df['relation'] = update_relations(df['relation'], filtered_solutions)
     df['has_solution'] = update_has_solution(df['ground solution'], filtered_solutions)
+
+    df['Accuracy'] = ''
     df['Accuracy'].iloc[-1] = str(100*round(
-            df['has_solution'].value_counts()[True] / (len(df['has_solution']) - 1), 3)) + '%'
+            df['has_solution'].value_counts()[True] / (len(df['has_solution'])), 3)) + '%'
     df['is_a'], df['related_to'], df['relation'] = separate_relations(df['relation'])
 
-    # crude way to tell frat from rat apart
-    try:
-        df = df[['FrAt', 'ground solution', 'solutions', 'has_solution', 'embeddings', 'top_embedding', 'relation', 'is_a', 'related_to', 'Accuracy']]
-    except KeyError:
-        df = df[['RAT', 'ground_solution', 'solutions', 'has_solution', 'embeddings', 'top_embedding', 'relation', 'is_a', 'related_to', 'Accuracy']]
-    df.to_excel(file.strip('.xlsx') + '_embeddings.xlsx')
-    df.to_json(file.strip('.xlsx') + '_embeddings.json', indent=4)
-    print('Saved output')
+    df = df[['FrAt', 'ground solution', 'solutions', 'has_solution',
+        'embeddings', 'top_embedding', 'relation', 'is_a', 'related_to', 'Accuracy']]
+    out = (f'{osp.splitext(args.file)[0]}_top{args.top_k}'
+        f'_merged-{args.merge_triple_tuple}_embeddings.xlsx')
+    df.to_excel(out)
+    print(f'Saved {out}')
+
+
+def merge_tuples_to_triples(nodes, solutions):
+    """"Incorportate the solutions of tuples into the corresponding triple parents"""
+    new_nodes = []
+    new_solutions = []
+    for j in range(len(nodes)):
+        splits = nodes[j].split(', ')
+
+        if len(splits) == 3:
+            new_nodes.append(nodes[j])
+            new_solutions_temp = solutions[j] if solutions[j] is not None else ''
+
+            for i in range(len(nodes)):
+                for split in splits:
+                    if split in nodes[i].split(', '):
+                        tmp_solution = solutions[i] if solutions[i] is not None else ''
+                        new_solutions_temp += ', ' + tmp_solution
+
+            new_solutions.append(
+                ', '.join(list(set(new_solutions_temp.split(', ')))))
+    return new_nodes, new_solutions
 
 
 def main():
     args = parse_args()
     nodes, solutions = parse_file(args.file)
+    if args.merge_triple_tuple:
+        nodes, solutions = merge_tuples_to_triples(nodes, solutions)
+
     g = GloveEmbedding('common_crawl_840', d_emb=300, show_progress=True)
     embeddings = []
     embeddings_best = []
@@ -164,7 +197,7 @@ def main():
         top_k = args.top_k if len(embd_best_temp) > args.top_k else len(embd_best_temp)
         filtered_solutions.append([embd_best_temp[i][0] for i in range(top_k)])
 
-    update_df(args.file, embeddings, embeddings_best, filtered_solutions)
+    update_df(args, embeddings, embeddings_best, filtered_solutions)
 
 if __name__ == '__main__':
     logging.basicConfig(filename='embedding_logging.txt', level=logging.DEBUG)

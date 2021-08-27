@@ -1,48 +1,4 @@
-Research Question 1: "To build a AI model to solve functional RAT"
-----------------------------------------------------------------------------------------------
 
-Approach 1: "Three word intersection" 
-- Done 
-
-
-Approach 2: "Two word intersection" 
-
-1. File name: conceptnet-local_embedding_search/depth_1/frat_2,3_conceptnet_search
-
-Query: Flu, nauseous, Virus 
-Answer candidate: sick, virose, disease, influenza, person
-
-File name: conceptnetlocal_embedding_search/depth_1/embeddings/frat_updated_2,3_conceptnet_search_embeddings
-
-See row 21 (only query words flu and nauseous) - this is because its true from the file from conceptnet-local_embedding_search
-
-However what I wish to have is, considering "sick, virose, disease, influenza, person" as the complete answer candidate even though sick is not present between (flu and virus) or (nauseous or virus) for the query Flu, nauseous, Virus and the average similarity is calcaulated as 
-
-sick            flu - sick 
-                nauseous - sick 
-                virus - sick
-disease         flu - disease  
-                virus - disease
-                nauseous – disease
-influenza       flu - influenza 
-                virus - influenza 
-                nauseous – influenza 
-person          flu - person 
-                virus - person
-                nauseous – person
- virose         nauseous - virose 
-                virus - virose  
-                flu – virose
-                
-after similarly average is calculated, and the most similar answer candidate is chosen as top_embedding. 
-    
-2. File name: conceptnet-local_embedding_search/depth_1/frat_2,3_conceptnet_search
-has an accuracy of 62.5 
-but File name:
-conceptnetlocal_embedding_search/depth_1/embeddings/frat_updated_2,3_conceptnet_search_embeddings
-has accuracy of 98.5 
-
- 
 
 Approach 3 : "Path length 2" 
 
