@@ -4,6 +4,7 @@ import pandas as pd
 
 from argparse import ArgumentParser
 from nltk import edit_distance
+from nltk.corpus import wordnet as wn
 from tqdm import tqdm
 
 
@@ -66,16 +67,18 @@ def main():
             'using the misc/number_batch_converter.py script')
         sys.exit()
     result = []
+    nouns = list({x.name().split('.', 1)[0] for x in wn.all_synsets('n')})
 
     for triple in tqdm(parse_file(args.file)):
         try:
             triple_result = nlp_model.most_similar(
-                positive=[node.strip() for node in triple], topn=args.top_k)
-            result.append(', '.join(tr[0] for tr in triple_result))
+                positive=[node.strip() for node in triple], topn=args.top_k*10)
+
+            filtered = [tr[0] for tr in triple_result if tr[0] in nouns][:args.top_k]
+            result.append(', '.join(tr for tr in filtered))
         except KeyError as e:
             print(e)
             result.append([])
-
 
     save_output(args, result)
 
