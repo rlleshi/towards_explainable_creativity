@@ -18,7 +18,19 @@ That is if a->b , explaination should be a is located_in b, where a and b are no
 
 This is because, there are explanation like 
 "hand is located in finger"
-"finger is located in hand" 
+"finger is located in hand"
+
+
+
+
+
+--------------------------------------------------------------------------
+1. r_m_thesis/output/frat/conceptnet-local_embedding_search/depth_1/embeddings/ frat_3_conceptnet_search_embeddings.xlxs 
+doesn't have the query body,commander,skull 
+
+though
+/r_m_thesis/output/frat/conceptnetlocal_embedding_search/depth_1/frat_3_conceptnet_search
+has that query as 'true' and have only one answer candidate. 
 
 
 
