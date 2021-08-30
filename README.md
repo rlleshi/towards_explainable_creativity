@@ -41,3 +41,12 @@ For every noun in the English language (65k taken from WordNet), get the embeddi
 Find the intersection of the queries based on [CenceptNet Numberbatch](https://github.com/commonsense/conceptnet-numberbatch). Find top3, top5, top10 solutions.
 
 In order to use the script you must first download the conceptnet-numberbatch model (link in `resources/`), unzip the model and convert it using the `misc/number_batch_converter.py` script.
+
+# Libraries & Tools
+
+1. [conceptnet lite](https://github.com/ldtoolkit/conceptnet-lite): python library for working with conceptnet offline
+  - [Conceptnet](https://conceptnet.io/) is a semantic network designed to help computers understand the meaning of words that people use
+2. [ConceptNet Numberbatch](https://github.com/commonsense/conceptnet-numberbatch): Set of word embeddings for conceptnet
+3. [embeddings](https://github.com/vzhong/embeddings): python package that provides pretrained word embeddings for natural language processing and machine learning
+4. [gensim](https://github.com/RaRe-Technologies/gensim): python library for topic modelling, document indexing and similarity retrieval with large corpora. Used in Natural Language Processing and Information Retrieval
+
