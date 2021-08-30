@@ -48,5 +48,5 @@ In order to use the script you must first download the conceptnet-numberbatch mo
   - [Conceptnet](https://conceptnet.io/) is a semantic network designed to help computers understand the meaning of words that people use
 2. [ConceptNet Numberbatch](https://github.com/commonsense/conceptnet-numberbatch): Set of word embeddings for conceptnet
 3. [embeddings](https://github.com/vzhong/embeddings): python package that provides pretrained word embeddings for natural language processing and machine learning
-4. [gensim](https://github.com/RaRe-Technologies/gensim): Gensim is a Python library for topic modelling, document indexing and similarity retrieval with large corpora. Target audience is the natural language processing (NLP) and information retrieval (IR) community.
+4. [gensim](https://github.com/RaRe-Technologies/gensim): python library for topic modelling, document indexing and similarity retrieval with large corpora. Used in Natural Language Processing and Information Retrieval
 
