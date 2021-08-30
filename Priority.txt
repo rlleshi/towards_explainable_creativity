@@ -1,37 +1,21 @@
-Research Question 2: "To build a AI model to solve structural RAT"
----------------------------------------------------------------------------------
-- Output for full RAT. 
-There was an error thrown only for path length 2. 
-
-
 Research Question 3: "To construct Explanations"
 ---------------------------------------------------------------------------------- 
 1. Explanations are calculated from the file 
-conceptnet-local_embedding_search/depth_2/embeddings/frat_3_conceptnet_search_embeddings-top10
+
+frat_2,3_conceptnet_search_top10_merged-True,_embeddings
 
 column name "top_embedding" 
 
 - chosing this file because of better accuracy. 
 
-2. just for explainations -  All the explanations are constructed using undirected ConceptNet? In that case I want the explanations to be done in directed graphs. 
+
+2. Gensim & Glove top1 accuracy
+
+
+3. just for explainations -  All the explanations are constructed using undirected ConceptNet? In that case I want the explanations to be done in directed graphs. 
 That is if a->b , explaination should be a is located_in b, where a and b are nodes and located_in is the edge name 
 
 This is because, there are explanation like 
 "hand is located in finger"
 "finger is located in hand"
-
-
-
-
-
---------------------------------------------------------------------------
-1. r_m_thesis/output/frat/conceptnet-local_embedding_search/depth_1/embeddings/ frat_3_conceptnet_search_embeddings.xlxs 
-doesn't have the query body,commander,skull 
-
-though
-/r_m_thesis/output/frat/conceptnetlocal_embedding_search/depth_1/frat_3_conceptnet_search
-has that query as 'true' and have only one answer candidate. 
-
-
-
 
